@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M E K T E B E T Y</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --primary-color: #008498;
+            --secondary-color: #f2f2f2;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--light-text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar .nav-links a,
+        .navbar .nav-links button {
+            color: var(--light-text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+        }
+        
+        .navbar .nav-links a:hover,
+        .navbar .nav-links button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-form {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            border: none;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 200px;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+        
+        .search-button {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-button:hover {
+            background-color: #ff8787;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .book-card {
+            background-color: var(--light-text-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .book-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .book-info {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-author,
+        .book-genre,
+        .book-price,
+        .book-stock,
+        .book-status,
+        .book-description {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        
+        .book-description {
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .book-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+            margin: 0 0.25rem;
+        }
+        
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: var(--light-text-color);
+        }
+        
+        .btn:hover {
+            filter: brightness(90%);
+        }
+        
+        .no-books {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links a,
+            .navbar .nav-links button {
+                width: 100%;
+                text-align: left;
+                padding: 0.75rem 0;
+            }
+            .search-form {
+                width: 100%;
+            }
+            .search-input {
+                max-width: none;
+            }
+            .books-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .book-card {
+                max-width: 100%;
+            }
+            .book-image {
+                height: 150px;
+            }
+            .book-title {
+                font-size: 0.9rem;
+            }
+            .book-author,
+            .book-genre,
+            .book-price,
+            .book-stock,
+            .book-status,
+            .book-description {
+                font-size: 0.7rem;
+            }
+            .btn {
+                padding: 0.4rem;
+                font-size: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .books-grid {
+                gap: 0.75rem;
+            }
+            .book-image {
+                height: 130px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="brand">M E K T E B E T Y</div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a>
+                <a href="{% url 'ajouter_un_livre' %}"><i class="fas fa-plus"></i> Ajouter un livre</a>
+                <a href="/exportBook/{{idlib}}"><i class="fas fa-file-export"></i> Exporter les livres</a>
+            </div>
+            <form action="{% url 'home' %}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Rechercher..." class="search-input" value="{{ request.GET.q }}">
+                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="books-grid">
+            {% for livre in livres %}
+            <div class="book-card">
+                {% if livre.Image %}
+                <img src="{{ livre.Image.url }}" alt="{{ livre.Name_book }}" class="book-image"> {% else %}
+                <img src="{% static 'images/default-book.png' %}" alt="Image non disponible" class="book-image"> {% endif %}
+                <div class="book-info">
+                    <h3 class="book-title">{{ livre.Name_book }}</h3>
+
+                    {% if livre.Authour_name %}
+                    <p class="book-author"><i class="fas fa-user"></i> {{ livre.Authour_name }}</p>
+                    {% else %}
+                    <p class="book-author"><i class="fas fa-user"></i> Auteur non disponible</p>
+                    {% endif %} {% if livre.Genre %}
+                    <p class="book-genre"><i class="fas fa-bookmark"></i> {{ livre.Genre }}</p>
+                    {% else %}
+                    <p class="book-genre"><i class="fas fa-bookmark"></i> Genre non disponible</p>
+                    {% endif %} {% if livre.Prix %}
+                    <p class="book-price"><i class="fas fa-tag"></i> {{ livre.Prix }}</p>
+                    {% else %}
+                    <p class="book-price"><i class="fas fa-tag"></i> Prix non disponible</p>
+                    {% endif %} {% if livre.Stock %}
+                    <p class="book-stock"><i class="fas fa-cubes"></i> Stock: {{ livre.Stock }}</p>
+                    {% else %}
+                    <p class="book-stock"><i class="fas fa-cubes"></i> Stock non disponible</p>
+                    {% endif %} {% if livre.status %}
+                    <p class="book-status"><i class="fas fa-info-circle"></i> Statut: {{ livre.status }}</p>
+                    {% else %}
+                    <p class="book-status"><i class="fas fa-info-circle"></i> Statut non disponible</p>
+                    {% endif %} {% if livre.Description %}
+                    <p class="book-description"><i class="fas fa-file-alt"></i> {{ livre.Description }}</p>
+                    {% else %}
+                    <p class="book-description"><i class="fas fa-file-alt"></i> Description non disponible</p>
+                    {% endif %}
+
+                    <div class="book-actions">
+                        <a href="{% url 'modifier_livre' livre.Id_livre %}" class="btn btn-warning"><i class="fas fa-edit"></i> Modifier</a>
+                        <form action="{% url 'supprimer_livre' livre.Id_livre %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="no-books">{% if request.GET.q %}Aucun résultat trouvé pour "{{ request.GET.q }}".{% else %}Aucun livre trouvé pour cette bibliothèque.{% endif %}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to book cards
+        const bookCards = document.querySelectorAll('.book-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        bookCards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        // Add confirmation for delete action
+        document.querySelectorAll('.btn-danger').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (!confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
